@@ -79,14 +79,14 @@ public class Teacher extends AuditModel {
         this.id = id;
     }
 
-    public List<Register> getRegisters() {
-        return registers;
+    public List<GradeBook> getGradeBooks() {
+        return gradeBooks;
     }
 
-    public void setRegisters(List<Register> registers) {
-        this.registers = registers;
+    public void setGradeBooks(List<GradeBook> gradeBooks) {
+        this.gradeBooks = gradeBooks;
     }
 
     @OneToMany(mappedBy = "teacher")
-    private List<Register> registers;
+    private List<GradeBook> gradeBooks;
 }
