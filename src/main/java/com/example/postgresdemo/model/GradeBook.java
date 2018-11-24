@@ -9,13 +9,13 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "registers")
-public class Register extends AuditModel {
+@Table(name = "gradebooks")
+public class GradeBook extends AuditModel {
     @Id
-    @GeneratedValue(generator = "register_generator")
+    @GeneratedValue(generator = "gradebook_generator")
     @SequenceGenerator(
-            name = "register_generator",
-            sequenceName = "register_sequence",
+            name = "gradebook_generator",
+            sequenceName = "gradebook_sequence",
             initialValue = 1000
     )
     private Long id;
@@ -30,8 +30,8 @@ public class Register extends AuditModel {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "Register_Student",
-            joinColumns = { @JoinColumn(name = "register_id") },
+            name = "Gradebook_Student",
+            joinColumns = { @JoinColumn(name = "gradebook_id") },
             inverseJoinColumns = { @JoinColumn(name = "student_id") }
     )
     private List<Student> students;

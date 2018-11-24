@@ -16,7 +16,7 @@ public class Subject extends AuditModel {
     private Long id;
 
     @OneToMany(mappedBy = "subject")
-    private List<Register> registers;
+    private List<GradeBook> gradeBooks;
 
     private String name;
 
@@ -28,12 +28,12 @@ public class Subject extends AuditModel {
         this.id = id;
     }
 
-    public List<Register> getRegisters() {
-        return registers;
+    public List<GradeBook> getGradeBooks() {
+        return gradeBooks;
     }
 
-    public void setRegisters(List<Register> registers) {
-        this.registers = registers;
+    public void setGradeBooks(List<GradeBook> gradeBooks) {
+        this.gradeBooks = gradeBooks;
     }
 
     public String getName() {
