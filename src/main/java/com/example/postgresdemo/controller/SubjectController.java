@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class SubjectController {
@@ -18,8 +19,8 @@ public class SubjectController {
     private SubjectRepository subjectRepository;
 
     @GetMapping("/subjects")
-    public Page<Subject> getSubjects(Pageable pageable) {
-        return subjectRepository.findAll(pageable);
+    public List<Subject> getSubjects(Pageable pageable) {
+        return subjectRepository.findAll(pageable).getContent();
     }
 
 
