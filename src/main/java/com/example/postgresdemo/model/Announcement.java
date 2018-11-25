@@ -18,6 +18,8 @@ public class Announcement extends AuditModel {
 
     private String title;
 
+    @Lob
+    @Column(name="content", length=1000)
     private String content;
 
     public Long getId() {
