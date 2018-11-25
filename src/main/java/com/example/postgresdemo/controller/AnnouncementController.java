@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class AnnouncementController {
@@ -18,8 +19,8 @@ public class AnnouncementController {
     private AnnouncementRepository announcementRepository;
 
     @GetMapping("/announcements")
-    public Page<Announcement> getAnnouncements(Pageable pageable) {
-        return announcementRepository.findAll(pageable);
+    public List<Announcement> getAnnouncements(Pageable pageable) {
+        return announcementRepository.findAll(pageable).getContent();
     }
 
 
