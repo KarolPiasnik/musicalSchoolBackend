@@ -42,6 +42,8 @@ public class TeacherController {
                 .map(teacher -> {
                     teacher.setName(teacherRequest.getName());
                     teacher.setSurname(teacherRequest.getSurname());
+                    teacher.setPesel(teacherRequest.getPesel());
+                    teacher.setAddress(teacherRequest.getAddress());
                     return teacherRepository.save(teacher);
                 }).orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id " + teacherId));
     }
