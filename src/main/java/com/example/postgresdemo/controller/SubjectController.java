@@ -18,18 +18,18 @@ public class SubjectController {
     @Autowired
     private SubjectRepository subjectRepository;
 
-    @GetMapping("/subjects")
+    @GetMapping("/api/subjects")
     public List<Subject> getSubjects(Pageable pageable) {
         return subjectRepository.findAll(pageable).getContent();
     }
 
 
-    @PostMapping("/subjects")
+    @PostMapping("/api/subjects")
     public Subject createSubject(@Valid @RequestBody Subject subject) {
         return subjectRepository.save(subject);
     }
 
-    @PutMapping("/subjects/{subjectId}")
+    @PutMapping("/api/subjects/{subjectId}")
     public Subject updateSubject(@PathVariable Long subjectId,
                                    @Valid @RequestBody Subject subjectRequest) {
         return subjectRepository.findById(subjectId)
@@ -41,7 +41,7 @@ public class SubjectController {
     }
 
 
-    @DeleteMapping("/subjects/{subjectId}")
+    @DeleteMapping("/api/subjects/{subjectId}")
     public ResponseEntity<?> deleteSubject(@PathVariable Long subjectId) {
         return subjectRepository.findById(subjectId)
                 .map(subject -> {

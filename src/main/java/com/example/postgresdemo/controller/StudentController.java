@@ -17,18 +17,18 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @GetMapping("/students")
+    @GetMapping("/api/students")
     public Page<Student> getStudents(Pageable pageable) {
         return studentRepository.findAll(pageable);
     }
 
 
-    @PostMapping("/students")
+    @PostMapping("/api/students")
     public Student createStudent(@Valid @RequestBody Student student) {
         return studentRepository.save(student);
     }
 
-    @PutMapping("/students/{studentId}")
+    @PutMapping("/api/students/{studentId}")
     public Student updateStudent(@PathVariable Long studentId,
                                    @Valid @RequestBody Student studentRequest) {
         return studentRepository.findById(studentId)
@@ -40,7 +40,7 @@ public class StudentController {
     }
 
 
-    @DeleteMapping("/students/{studentId}")
+    @DeleteMapping("/api/students/{studentId}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long studentId) {
         return studentRepository.findById(studentId)
                 .map(student -> {

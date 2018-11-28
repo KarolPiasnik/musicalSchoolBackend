@@ -4,7 +4,6 @@ import com.example.postgresdemo.exception.ResourceNotFoundException;
 import com.example.postgresdemo.model.Announcement;
 import com.example.postgresdemo.repository.AnnouncementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +17,18 @@ public class AnnouncementController {
     @Autowired
     private AnnouncementRepository announcementRepository;
 
-    @GetMapping("/announcements")
+    @GetMapping("/api/announcements")
     public List<Announcement> getAnnouncements(Pageable pageable) {
         return announcementRepository.findAll(pageable).getContent();
     }
 
 
-    @PostMapping("/announcements")
+    @PostMapping("/api/announcements")
     public Announcement createAnnouncement(@Valid @RequestBody Announcement announcement) {
         return announcementRepository.save(announcement);
     }
 
-    @PutMapping("/announcements/{announcementId}")
+    @PutMapping("/api/announcements/{announcementId}")
     public Announcement updateAnnouncement(@PathVariable Long announcementId,
                                    @Valid @RequestBody Announcement announcementRequest) {
         return announcementRepository.findById(announcementId)
@@ -41,7 +40,7 @@ public class AnnouncementController {
     }
 
 
-    @DeleteMapping("/announcements/{announcementId}")
+    @DeleteMapping("/api/announcements/{announcementId}")
     public ResponseEntity<?> deleteAnnouncement(@PathVariable Long announcementId) {
         return announcementRepository.findById(announcementId)
                 .map(announcement -> {

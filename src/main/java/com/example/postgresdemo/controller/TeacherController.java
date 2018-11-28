@@ -19,13 +19,13 @@ public class TeacherController {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    @GetMapping("/teachers")
+    @GetMapping("/api/teachers")
     public List<Teacher> getTeachers(@PageableDefault(value=50) Pageable pageable) {
         return teacherRepository.findAll(pageable).getContent();
     }
 
 
-    @PostMapping("/teachers")
+    @PostMapping("/api/teachers")
     public Teacher createTeacher( @Valid @RequestBody Teacher teacher) {
         System.out.println(teacher.getName());
         System.out.println(teacher.getAddress());
@@ -36,7 +36,7 @@ public class TeacherController {
     }
 
 
-    @PutMapping("/teachers/{teacherId}")
+    @PutMapping("/api/teachers/{teacherId}")
     public Teacher updateTeacher(@PathVariable Long teacherId,
                                    @Valid @RequestBody Teacher teacherRequest) {
         return teacherRepository.findById(teacherId)
@@ -50,7 +50,7 @@ public class TeacherController {
     }
 
 
-    @DeleteMapping("/teachers/{teacherId}")
+    @DeleteMapping("/api/teachers/{teacherId}")
     public ResponseEntity<?> deleteTeacher(@PathVariable Long teacherId) {
         return teacherRepository.findById(teacherId)
                 .map(teacher -> {

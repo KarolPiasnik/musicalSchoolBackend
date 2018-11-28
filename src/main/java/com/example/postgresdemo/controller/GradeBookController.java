@@ -17,18 +17,18 @@ public class GradeBookController {
     @Autowired
     private GradeBookRepository gradeBookRepository;
 
-    @GetMapping("/gradebooks")
+    @GetMapping("/api/gradeBook")
     public Page<GradeBook> getGradeBooks(Pageable pageable) {
         return gradeBookRepository.findAll(pageable);
     }
 
 
-    @PostMapping("/gradebooks")
+    @PostMapping("/api/gradeBook")
     public GradeBook createGradeBook(@Valid @RequestBody GradeBook gradeBook) {
         return gradeBookRepository.save(gradeBook);
     }
 
-    @PutMapping("/gradebooks/{gradeBookId}")
+    @PutMapping("/api/gradeBook/{gradeBookId}")
     public GradeBook updateGradeBook(@PathVariable Long gradeBookId,
                                    @Valid @RequestBody GradeBook gradeBookRequest) {
         return gradeBookRepository.findById(gradeBookId)
@@ -40,7 +40,7 @@ public class GradeBookController {
     }
 
 
-    @DeleteMapping("/gradebooks/{gradeBookId}")
+    @DeleteMapping("/api/gradeBook/{gradeBookId}")
     public ResponseEntity<?> deleteGradeBook(@PathVariable Long gradeBookId) {
         return gradeBookRepository.findById(gradeBookId)
                 .map(gradeBook -> {
