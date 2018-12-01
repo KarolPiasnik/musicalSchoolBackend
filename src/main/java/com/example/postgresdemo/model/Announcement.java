@@ -1,9 +1,12 @@
 package com.example.postgresdemo.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "announcements")
 public class Announcement extends AuditModel {
@@ -21,28 +24,4 @@ public class Announcement extends AuditModel {
     @Lob
     @Column(name="content", length=1000)
     private String content;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }
