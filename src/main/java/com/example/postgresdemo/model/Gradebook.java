@@ -1,6 +1,7 @@
 package com.example.postgresdemo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "gradebooks")
-public class GradeBook extends AuditModel {
+public class Gradebook extends AuditModel {
     @Id
     @GeneratedValue(generator = "gradebook_generator")
     @SequenceGenerator(
@@ -23,6 +24,7 @@ public class GradeBook extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "subject_id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("gradebooks")
     private Subject subject;
 
     private String name;
@@ -38,6 +40,7 @@ public class GradeBook extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "teacher_id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("gradebooks")
     private Teacher teacher;
 
     public Long getId() {

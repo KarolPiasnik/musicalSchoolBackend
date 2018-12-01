@@ -20,12 +20,12 @@ public class Student extends Person {
 
     private Long id;
 
-    private GradeBook maingradebook;
+    private Gradebook maingradebook;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private List<GradeBook> gradeBooks;
+    private List<Gradebook> gradebooks;
 
 }

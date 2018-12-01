@@ -1,10 +1,13 @@
 package com.example.postgresdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="subjects")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Subject extends AuditModel {
     @Id
     @GeneratedValue(generator = "subject_generator")
@@ -16,7 +19,8 @@ public class Subject extends AuditModel {
     private Long id;
 
     @OneToMany(mappedBy = "subject")
-    private List<GradeBook> gradeBooks;
+    @JsonIgnoreProperties("subject")
+    private List<Gradebook> gradebooks;
 
     private String name;
 
@@ -28,12 +32,12 @@ public class Subject extends AuditModel {
         this.id = id;
     }
 
-    public List<GradeBook> getGradeBooks() {
-        return gradeBooks;
+    public List<Gradebook> getGradebooks() {
+        return gradebooks;
     }
 
-    public void setGradeBooks(List<GradeBook> gradeBooks) {
-        this.gradeBooks = gradeBooks;
+    public void setGradebooks(List<Gradebook> gradebooks) {
+        this.gradebooks = gradebooks;
     }
 
     public String getName() {
