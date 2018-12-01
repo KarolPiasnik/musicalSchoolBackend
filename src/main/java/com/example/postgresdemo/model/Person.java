@@ -1,10 +1,12 @@
 package com.example.postgresdemo.model;
 
+import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
+@Data
 @MappedSuperclass
 @EntityListeners(Person.class)
 public abstract class Person extends AuditModel {
