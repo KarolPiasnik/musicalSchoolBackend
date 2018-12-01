@@ -3,6 +3,8 @@ package com.example.postgresdemo.controller;
 import com.example.postgresdemo.exception.ResourceNotFoundException;
 import com.example.postgresdemo.model.GradeBook;
 import com.example.postgresdemo.repository.GradeBookRepository;
+import com.example.postgresdemo.repository.SubjectRepository;
+import com.example.postgresdemo.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,13 @@ public class GradeBookController {
     @Autowired
     private GradeBookRepository gradeBookRepository;
 
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    @Autowired
+    private SubjectRepository subjectRepository;
+
+
     @GetMapping("/api/gradebooks")
     public List<GradeBook> getGradeBooks(Pageable pageable) {
         return gradeBookRepository.findAll(pageable).getContent();
@@ -31,6 +40,9 @@ public class GradeBookController {
 
     @PostMapping("/api/gradebooks")
     public GradeBook createGradeBook(@Valid @RequestBody GradeBook gradeBook) {
+        System.out.println(gradeBook.getSubject().getName());
+        teacherRepository.save(gradeBook.getTeacher());
+        subjectRepository.save(gradeBook.getSubject());
         return gradeBookRepository.save(gradeBook);
     }
 
