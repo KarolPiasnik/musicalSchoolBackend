@@ -28,10 +28,4 @@ public class Student extends Person {
     @JsonIgnore
     private List<GradeBook> gradeBooks;
 
-
-
-
-
-
-
 }
