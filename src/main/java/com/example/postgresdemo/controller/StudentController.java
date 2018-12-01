@@ -1,7 +1,10 @@
 package com.example.postgresdemo.controller;
 
 import com.example.postgresdemo.exception.ResourceNotFoundException;
+import com.example.postgresdemo.model.Gradebook;
 import com.example.postgresdemo.model.Student;
+import com.example.postgresdemo.model.Subject;
+import com.example.postgresdemo.repository.GradebookRepository;
 import com.example.postgresdemo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,12 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
 
 @RestController
 public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private GradebookRepository gradebookRepository;
 
     @GetMapping("/api/students")
     public Page<Student> getStudents(Pageable pageable) {
@@ -25,6 +32,15 @@ public class StudentController {
 
     @PostMapping("/api/students")
     public Student createStudent(@Valid @RequestBody Student student) {
+        if (student.getMainGradebook().getId() != null) {
+            Gradebook gradebook = gradebookRepository.getOne(student.getMainGradebook().getId());
+            if (gradebook == null) {
+                throw new NoSuchElementException();
+            }
+            gradebookRepository.save(gradebook);
+        } else {
+            gradebookRepository.save(student.getMainGradebook());
+        }
         return studentRepository.save(student);
     }
 

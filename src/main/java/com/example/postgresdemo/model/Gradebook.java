@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "gradebooks")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Gradebook extends AuditModel {
     @Id
     @GeneratedValue(generator = "gradebook_generator")

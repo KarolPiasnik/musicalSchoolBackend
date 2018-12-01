@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "students")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Student extends Person {
     @Id
     @GeneratedValue(generator = "student_generator")
@@ -22,7 +23,9 @@ public class Student extends Person {
 
     private Long id;
 
-    @OneToMany(mappedBy = "students")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "gradebook_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties("students")
     private Gradebook mainGradebook;
 
