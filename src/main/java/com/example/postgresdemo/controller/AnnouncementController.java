@@ -30,7 +30,7 @@ public class AnnouncementController {
 
     @PutMapping("/api/announcements/{announcementId}")
     public Announcement updateAnnouncement(@PathVariable Long announcementId,
-                                   @Valid @RequestBody Announcement announcementRequest) {
+                                           @Valid @RequestBody Announcement announcementRequest) {
         return announcementRepository.findById(announcementId)
                 .map(announcement -> {
                     announcement.setTitle(announcementRequest.getTitle());

@@ -1,6 +1,5 @@
 package com.example.postgresdemo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -30,11 +29,11 @@ public class Gradebook extends AuditModel {
 
     private String name;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "Gradebook_Student",
-            joinColumns = { @JoinColumn(name = "gradebook_id") },
-            inverseJoinColumns = { @JoinColumn(name = "student_id") }
+            joinColumns = {@JoinColumn(name = "gradebook_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
     @JsonIgnoreProperties("gradebooks")
     private List<Student> students;

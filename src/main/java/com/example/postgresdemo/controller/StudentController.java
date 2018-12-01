@@ -30,7 +30,7 @@ public class StudentController {
 
     @PutMapping("/api/students/{studentId}")
     public Student updateStudent(@PathVariable Long studentId,
-                                   @Valid @RequestBody Student studentRequest) {
+                                 @Valid @RequestBody Student studentRequest) {
         return studentRepository.findById(studentId)
                 .map(student -> {
                     student.setName(studentRequest.getName());

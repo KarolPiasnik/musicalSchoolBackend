@@ -42,26 +42,24 @@ public class GradebookController {
 
     @PostMapping("/api/gradebooks")
     public Gradebook createGradebook(@Valid @RequestBody Gradebook gradebook) {
-        if(gradebook.getSubject().getId() != null){
+        if (gradebook.getSubject().getId() != null) {
             Subject subject = subjectRepository.getOne(gradebook.getSubject().getId());
-            if(subject == null){
+            if (subject == null) {
                 throw new NoSuchElementException();
             }
             subjectRepository.save(subject);
-        }
-        else{
+        } else {
             subjectRepository.save(gradebook.getSubject());
         }
 
 
-        if(gradebook.getTeacher().getId() != null){
+        if (gradebook.getTeacher().getId() != null) {
             Teacher teacher = teacherRepository.getOne(gradebook.getTeacher().getId());
-            if(teacher == null){
+            if (teacher == null) {
                 throw new NoSuchElementException();
             }
             teacherRepository.save(teacher);
-        }
-        else{
+        } else {
             teacherRepository.save(gradebook.getTeacher());
 
         }

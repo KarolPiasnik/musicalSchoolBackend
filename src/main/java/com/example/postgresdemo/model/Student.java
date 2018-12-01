@@ -1,8 +1,7 @@
 package com.example.postgresdemo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 

@@ -3,8 +3,6 @@ package com.example.postgresdemo.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Data
 @Entity
@@ -22,6 +20,6 @@ public class Announcement extends AuditModel {
     private String title;
 
     @Lob
-    @Column(name="content", length=1000)
+    @Column(name = "content", length = 1000)
     private String content;
 }

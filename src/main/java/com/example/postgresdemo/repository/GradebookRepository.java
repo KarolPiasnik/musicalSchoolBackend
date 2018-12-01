@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface GradebookRepository extends JpaRepository<Gradebook, Long> {
     List<Gradebook> findBySubjectId(Long subjectId);
+
     List<Teacher> findByTeacherId(Long teacherId);
 
 }

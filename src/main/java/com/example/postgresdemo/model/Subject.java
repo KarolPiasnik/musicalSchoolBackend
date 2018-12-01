@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="subjects")
+@Table(name = "subjects")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Subject extends AuditModel {
     @Id

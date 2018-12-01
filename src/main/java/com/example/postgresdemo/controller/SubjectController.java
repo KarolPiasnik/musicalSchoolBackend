@@ -4,7 +4,6 @@ import com.example.postgresdemo.exception.ResourceNotFoundException;
 import com.example.postgresdemo.model.Subject;
 import com.example.postgresdemo.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,7 @@ public class SubjectController {
 
     @PutMapping("/api/subjects/{subjectId}")
     public Subject updateSubject(@PathVariable Long subjectId,
-                                   @Valid @RequestBody Subject subjectRequest) {
+                                 @Valid @RequestBody Subject subjectRequest) {
         return subjectRepository.findById(subjectId)
                 .map(subject -> {
                     subject.setName(subjectRequest.getName());
