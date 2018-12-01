@@ -35,6 +35,7 @@ public class Gradebook extends AuditModel {
             joinColumns = { @JoinColumn(name = "gradebook_id") },
             inverseJoinColumns = { @JoinColumn(name = "student_id") }
     )
+    @JsonIgnoreProperties("gradebooks")
     private List<Student> students;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)

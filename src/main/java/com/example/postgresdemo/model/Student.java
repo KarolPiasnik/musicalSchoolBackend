@@ -1,6 +1,7 @@
 package com.example.postgresdemo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -20,12 +21,14 @@ public class Student extends Person {
 
     private Long id;
 
-    private Gradebook maingradebook;
+    @OneToMany(mappedBy = "students")
+    @JsonIgnoreProperties("students")
+    private Gradebook mainGradebook;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonIgnoreProperties("students")
     private List<Gradebook> gradebooks;
 
 }
