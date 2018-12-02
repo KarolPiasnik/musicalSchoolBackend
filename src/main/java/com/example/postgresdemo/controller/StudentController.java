@@ -32,14 +32,16 @@ public class StudentController {
 
     @PostMapping("/api/students")
     public Student createStudent(@Valid @RequestBody Student student) {
-        if (student.getMainGradebook().getId() != null) {
-            Gradebook gradebook = gradebookRepository.getOne(student.getMainGradebook().getId());
-            if (gradebook == null) {
-                throw new NoSuchElementException();
+        if (student.getMainGradebook() != null) {
+            if (student.getMainGradebook().getId() != null) {
+                Gradebook gradebook = gradebookRepository.getOne(student.getMainGradebook().getId());
+                if (gradebook == null) {
+                    throw new NoSuchElementException();
+                }
+                gradebookRepository.save(gradebook);
+            } else {
+                gradebookRepository.save(student.getMainGradebook());
             }
-            gradebookRepository.save(gradebook);
-        } else {
-            gradebookRepository.save(student.getMainGradebook());
         }
         return studentRepository.save(student);
     }
