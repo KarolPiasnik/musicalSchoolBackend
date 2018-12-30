@@ -23,14 +23,14 @@ public class Lesson extends AuditModel {
     )
     private Long id;
 
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name = "Lesson_Student",
-//            joinColumns = {@JoinColumn(name = "lesson_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-//    )
-//    @JsonIgnoreProperties("lessons")
-//    private List<Student> students;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Lesson_Student",
+            joinColumns = {@JoinColumn(name = "lesson_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")}
+    )
+    @JsonIgnoreProperties("lessons")
+    private List<Student> students;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "gradebook_id", nullable = false)
@@ -38,9 +38,9 @@ public class Lesson extends AuditModel {
     @JsonIgnoreProperties("lessons")
     private Gradebook gradebook;
 
-    private Date from;
+    private Date startTime;
 
-    private Date to;
+    private Date endTime;
 }
 
 
