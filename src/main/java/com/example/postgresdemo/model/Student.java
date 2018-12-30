@@ -35,10 +35,10 @@ public class Student extends Person {
     @JsonIgnoreProperties("students")
     private List<Gradebook> gradebooks;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "student_id", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnoreProperties("students")
-//    private List<Lesson> lessons;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("students")
+    private List<Lesson> lessons;
 
 }

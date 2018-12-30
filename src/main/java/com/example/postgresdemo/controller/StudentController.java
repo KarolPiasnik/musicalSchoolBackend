@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -25,8 +26,8 @@ public class StudentController {
     private GradebookRepository gradebookRepository;
 
     @GetMapping("/api/students")
-    public Page<Student> getStudents(Pageable pageable) {
-        return studentRepository.findAll(pageable);
+    public List<Student> getStudents(Pageable pageable) {
+        return studentRepository.findAll(pageable).getContent();
     }
 
 
