@@ -6,6 +6,7 @@ import com.example.postgresdemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     private UserRepository userRepository;
@@ -25,6 +27,7 @@ public class UserController {
 
     @PostMapping("/api/users")
     public User createUser(@Valid @RequestBody User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
