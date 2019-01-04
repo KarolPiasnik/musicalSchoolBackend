@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Date;
 
 @RestController
 public class LessonController {
@@ -21,6 +23,15 @@ public class LessonController {
     @GetMapping("/api/lessons")
     public List<Lesson> getLessons(@PageableDefault(value = 50) Pageable pageable) {
         return lessonRepository.findAll(pageable).getContent();
+    }
+
+    @GetMapping("/api/lessons/{weekStartDate}/{weekEndDate}")
+    public List<Lesson> getLessonsByWeek(@PathVariable Long weekStartDate, @PathVariable Long weekEndDate) {
+
+        Date weekStart = new Date(new Timestamp(weekStartDate).getTime());
+        Date weekEnd = new Date(new Timestamp(weekEndDate).getTime());
+
+        return lessonRepository.findAllByStartTimeIsGreaterThanEqualAndEndTimeLessThanEqual(weekStart, weekEnd);
     }
 
 

@@ -32,7 +32,7 @@ public class Gradebook extends AuditModel {
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-            name = "Gradebook_Student",
+            name = "gradebook_student",
             joinColumns = {@JoinColumn(name = "gradebook_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
