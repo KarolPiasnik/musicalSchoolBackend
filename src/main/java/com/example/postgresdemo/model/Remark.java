@@ -24,6 +24,10 @@ public class Remark extends AuditModel {
     )
     private Long id;
 
+    private Student student;
+
+    private Gradebook gradebook;
+
     String content;
 
 }
