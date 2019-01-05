@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,10 +15,13 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @GetMapping("/api/users")
     public List<User> getUsers(Pageable pageable) {
@@ -27,13 +31,16 @@ public class UserController {
 
     @PostMapping("/api/users")
     public User createUser(@Valid @RequestBody User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getActive() == null) {
+            user.setActive(false);
+        }
         return userRepository.save(user);
     }
 
     @PutMapping("/api/users/{userId}")
     public User updateUser(@PathVariable Long userId,
-                                           @Valid @RequestBody User userRequest) {
+                           @Valid @RequestBody User userRequest) {
         return userRepository.findById(userId)
                 .map(user -> {
 //                    user.setTitle(userRequest.getTitle());

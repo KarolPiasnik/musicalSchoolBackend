@@ -8,8 +8,12 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,6 +38,12 @@ public class User extends org.springframework.security.core.userdetails.User {
 
     @NotBlank
     String password;
+
+    @NotNull
+    Boolean active;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<Role> roles;
 
     public User(){
         super("x","x",true,true,true,true, new LinkedHashSet<>());
