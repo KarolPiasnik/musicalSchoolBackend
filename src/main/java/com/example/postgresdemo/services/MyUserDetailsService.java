@@ -19,13 +19,23 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByUsername(username);
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getActive(),user.getActive(),user.getActive(),user.getActive(), AuthorityUtils.createAuthorityList(
-                user.getRoles()
-                        .stream()
-                        .map(r -> "ROLE_" + r.getName().toUpperCase())
-                        .collect(Collectors.toList())
-                        .toArray(new String[]{})));
+        return repository
+                .findByUsername(username)
+                .map(u -> new org.springframework.security.core.userdetails.User(
+                        u.getUsername(),
+                        u.getPassword(),
+                        u.getActive(),
+                        u.getActive(),
+                        u.getActive(),
+                        u.getActive(),
+                        AuthorityUtils.createAuthorityList(
+                                u.getRoles()
+                                        .stream()
+                                        .map(r -> "ROLE_" + r.getName().toUpperCase())
+                                        .collect(Collectors.toList())
+                                        .toArray(new String[]{}))))
+                .orElseThrow(() -> new UsernameNotFoundException("No user with "
+                        + "the name " + username + "was found in the database"));
     }
 
 

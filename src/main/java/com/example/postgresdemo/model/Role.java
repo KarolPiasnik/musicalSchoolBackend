@@ -1,31 +1,41 @@
 package com.example.postgresdemo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
+
+/***
+ * Define the roles for users.
+ */
+
 @Entity
-@Getter
-@Setter
-@ToString
 @Data
 @Table(name = "roles")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Role extends AuditModel {
+public class Role implements Serializable {
+
     @Id
-    @GeneratedValue(generator = "role_generator")
+    @GeneratedValue
     @SequenceGenerator(
-            name = "role_generator",
-            sequenceName = "role_sequence",
+            name = "user_generator",
+            sequenceName = "user_sequence",
             initialValue = 1000
     )
     private Long id;
 
     private String name;
+    public Role(){}
+    public Role(String name) {
+        this.name = name;
+    }
 
-    public Role(String name){
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }
-
-

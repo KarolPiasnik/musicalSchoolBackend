@@ -1,4 +1,4 @@
-package com.example.postgresdemo.config.config;
+package com.example.postgresdemo.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,15 +21,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-//                .antMatchers("/api/students/**").authenticated()
-//                .antMatchers("/api/lessons/**").authenticated()
-//                .antMatchers("/api/gradebooks/**").authenticated()
-//                .antMatchers("/api/teachers/**").authenticated()
-//                .antMatchers("/api/students/**").authenticated()
-//                .antMatchers("/api/users/**").authenticated()
-//                .antMatchers("/api/login/**").authenticated()
-                //.antMatchers("/oauth/token/**").permitAll()
-                //.antMatchers("/oauth/authorize/**").permitAll()
+                .antMatchers("/api/students/**").permitAll()
+                .antMatchers("/api/lessons/**").authenticated()
+                .antMatchers("/api/gradebooks/**").authenticated()
+                .antMatchers("/api/teachers/**").authenticated()
+                .antMatchers("/api/users/**").authenticated()
+                .antMatchers("/api/remarks/**").authenticated()
+                .antMatchers("/api/grades/**").authenticated()
+                .antMatchers("/api/announcements/**").authenticated()
+                .antMatchers("/oauth/token/**").permitAll()
                 .antMatchers("/**").permitAll();
 
     }

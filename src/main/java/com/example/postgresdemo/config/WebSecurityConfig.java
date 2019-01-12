@@ -1,4 +1,4 @@
-package com.example.postgresdemo.config.config;
+package com.example.postgresdemo.config;
 
 import com.example.postgresdemo.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,47 +9,44 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
-    
+    private UserDetailsService myUserDetailsService;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-        
+
     @Autowired
     public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(myUserDetailsService)
-            .passwordEncoder(passwordEncoder);    
+                .userDetailsService(myUserDetailsService)
+                .passwordEncoder(passwordEncoder);
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/oauth/token").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .httpBasic()
+                .httpBasic()
                 .and()
-            .csrf().disable();
+                .csrf().disable();
     }
-    
-    /**
-         * See: https://github.com/spring-projects/spring-boot/issues/11136
-         *
-         * @return
-         * @throws Exception
-         */
+
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }    
+    }
 
 }
+

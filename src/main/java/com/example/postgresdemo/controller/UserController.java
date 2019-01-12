@@ -6,7 +6,6 @@ import com.example.postgresdemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,9 +31,9 @@ public class UserController {
     @PostMapping("/api/users")
     public User createUser(@Valid @RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getActive() == null) {
-            user.setActive(false);
-        }
+//        if (user.getActive() == null) {
+//            user.setActive(false);
+//        }
         return userRepository.save(user);
     }
 
@@ -43,8 +42,6 @@ public class UserController {
                            @Valid @RequestBody User userRequest) {
         return userRepository.findById(userId)
                 .map(user -> {
-//                    user.setTitle(userRequest.getTitle());
-//                    user.setContent(userRequest.getContent());
                     return userRepository.save(user);
                 }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
     }

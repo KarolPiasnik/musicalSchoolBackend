@@ -1,4 +1,4 @@
-package com.example.postgresdemo.config.config;
+package com.example.postgresdemo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,11 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
-/**
- * Configures the authorization server.
- * The @EnableAuthorizationServer annotation is used to configure the OAuth 2.0 Authorization Server mechanism,
- * together with any @Beans that implement AuthorizationServerConfigurer (there is a handy adapter implementation with empty methods).
- */
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
