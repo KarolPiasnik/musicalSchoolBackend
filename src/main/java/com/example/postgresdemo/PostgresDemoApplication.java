@@ -24,12 +24,17 @@ public class PostgresDemoApplication {
     @Bean
     public CommandLineRunner setupDefaultUser(UserService service) {
         return args -> {
-            service.save(new User(
-                    "user7", //username
-                    "user7", //password
-                    Arrays.asList(new Role("USER"), new Role("ACTUATOR")),//roles
-                    true//Active
-            ));
+            try {
+                service.save(new User(
+                        "user8", //username
+                        "user8", //password
+                        Arrays.asList(new Role("USER"), new Role("ACTUATOR")),//roles
+                        true//Active
+                ));
+            }
+            catch(Exception ex){
+
+            }
         };
     }
 

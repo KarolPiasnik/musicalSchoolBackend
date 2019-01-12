@@ -26,6 +26,7 @@ public class User implements Serializable {
     )
     private Long id;
 
+    @Column(unique=true)
     private String username;
     private String password;
 
