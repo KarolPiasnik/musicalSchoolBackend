@@ -23,9 +23,9 @@ public class Lesson extends AuditModel {
     )
     private Long id;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
-            name = "Lesson_Student",
+            name = "lesson_student",
             joinColumns = {@JoinColumn(name = "lesson_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
