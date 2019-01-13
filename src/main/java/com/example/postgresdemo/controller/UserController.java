@@ -27,6 +27,10 @@ public class UserController {
         return userRepository.findAll(pageable).getContent();
     }
 
+    @GetMapping("/api/user/{username}")
+    public User getUserByName(@PathVariable String username) {
+        return userRepository.findByUsername(username).get();
+    }
 
     @PostMapping("/api/users")
     public User createUser(@Valid @RequestBody User user) {

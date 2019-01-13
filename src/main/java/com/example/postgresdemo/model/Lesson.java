@@ -29,13 +29,13 @@ public class Lesson extends AuditModel {
             joinColumns = {@JoinColumn(name = "lesson_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
-    @JsonIgnoreProperties("lessons")
+    @JsonIgnoreProperties(value = {"lessons"}, allowSetters = true)
     private List<Student> students;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "gradebook_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties("lessons")
+    @JsonIgnoreProperties(value = {"lessons"}, allowSetters = true)
     private Gradebook gradebook;
 
     private Date startTime;
