@@ -3,7 +3,7 @@ package com.example.postgresdemo.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -19,7 +19,7 @@ public class Question extends AuditModel {
     )
     private Long id;
 
-    @NotBlank
+    @NotNull
     @Size(min = 3, max = 100)
     private String title;
 

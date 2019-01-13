@@ -2,23 +2,23 @@ package com.example.postgresdemo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.io.Serializable;
+import java.util.List;
 
-@Getter
-@Setter
+/***
+ * Define authentication properties associated with a user.
+ */
+
 @Entity
+@Data
 @Table(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class User extends org.springframework.security.core.userdetails.User {
+public class User implements Serializable {
+
     @Id
-    @GeneratedValue(generator = "user_generator")
+    @GeneratedValue
     @SequenceGenerator(
             name = "user_generator",
             sequenceName = "user_sequence",
@@ -26,26 +26,20 @@ public class User extends org.springframework.security.core.userdetails.User {
     )
     private Long id;
 
+    private String username;
+    private String password;
 
-    Person personalInfo;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Role> roles;
+    private Boolean active;
 
-    @NotBlank
-    String username;
+    public User(){}
 
-    @NotBlank
-    String password;
-
-    public User(){
-        super("x","x",true,true,true,true, new LinkedHashSet<>());
-    }
-
-    public User(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, authorities);
-    }
-
-    public User(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+    public User(String username, String password, List<Role> roles, Boolean active) {
         this.username = username;
         this.password = password;
+        this.roles = roles;
+        this.active = active;
     }
+
 }
