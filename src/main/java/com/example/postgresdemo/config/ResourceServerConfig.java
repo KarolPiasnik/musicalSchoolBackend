@@ -21,7 +21,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/students/**").permitAll()
+                .antMatchers("/api/students/**").authenticated()
                 .antMatchers("/api/lessons/**").authenticated()
                 .antMatchers("/api/gradebooks/**").authenticated()
                 .antMatchers("/api/teachers/**").authenticated()
@@ -29,8 +29,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/remarks/**").authenticated()
                 .antMatchers("/api/grades/**").authenticated()
                 .antMatchers("/api/announcements/**").authenticated()
+                .antMatchers("/api/subjects/**").authenticated()
+                .antMatchers("/api/questions/**").authenticated()
+                .antMatchers("/api/answers/**").authenticated()
                 .antMatchers("/oauth/token/**").permitAll()
-                .antMatchers("/**").permitAll();
+                .antMatchers("/**").authenticated();
 
     }
 }
