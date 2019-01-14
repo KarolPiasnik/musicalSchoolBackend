@@ -32,7 +32,7 @@ public class User implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Role> roles;
-    private Boolean active;
+    private Boolean active = true;
 
     public User(){}
 
