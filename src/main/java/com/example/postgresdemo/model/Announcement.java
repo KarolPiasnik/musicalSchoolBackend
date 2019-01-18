@@ -3,6 +3,7 @@ package com.example.postgresdemo.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,4 +23,7 @@ public class Announcement extends AuditModel {
     @Lob
     @Column(name = "content", length = 1000)
     private String content;
+
+//
+//    List<Role> roles;
 }

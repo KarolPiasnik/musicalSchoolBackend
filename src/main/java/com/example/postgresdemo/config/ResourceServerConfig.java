@@ -25,13 +25,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/lessons/**").authenticated()
                 .antMatchers("/api/gradebooks/**").authenticated()
                 .antMatchers("/api/teachers/**").authenticated()
-                .antMatchers("/api/users/**").authenticated()
+                .antMatchers("/api/users/**").permitAll()
                 .antMatchers("/api/remarks/**").authenticated()
                 .antMatchers("/api/grades/**").authenticated()
                 .antMatchers("/api/announcements/**").authenticated()
                 .antMatchers("/api/subjects/**").authenticated()
                 .antMatchers("/api/questions/**").authenticated()
                 .antMatchers("/api/answers/**").authenticated()
+                .antMatchers("/api/messages/**").authenticated()
                 .antMatchers("/oauth/token/**").permitAll()
                 .antMatchers("/**").authenticated();
 
