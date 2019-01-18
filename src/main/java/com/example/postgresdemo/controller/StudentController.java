@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +19,9 @@ import java.util.NoSuchElementException;
 
 @RestController
 public class StudentController {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -33,6 +37,7 @@ public class StudentController {
 
     @PostMapping("/api/students")
     public Student createStudent(@Valid @RequestBody Student student) {
+        student.setPassword(passwordEncoder.encode(student.getPassword()));
         if (student.getMainGradebook() != null) {
             if (student.getMainGradebook().getId() != null) {
                 Gradebook gradebook = gradebookRepository.getOne(student.getMainGradebook().getId());

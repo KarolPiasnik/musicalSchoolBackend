@@ -3,6 +3,6 @@ package com.example.postgresdemo.model;
 import lombok.Data;
 
 @Data
-public class Parent extends Person {
+public class Parent extends User {
 
 }

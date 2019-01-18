@@ -22,6 +22,7 @@ public class LessonController {
 
     @GetMapping("/api/lessons")
     public List<Lesson> getLessons(@PageableDefault(value = 50) Pageable pageable) {
+
         return lessonRepository.findAll(pageable).getContent();
     }
 

@@ -29,7 +29,8 @@ public class PostgresDemoApplication {
                         "user8", //username
                         "user8", //password
                         Arrays.asList(new Role("USER"), new Role("ACTUATOR")),//roles
-                        true//Active
+                        true,
+                        "xxx","xxx","xx","xxx"
                 ));
             }
             catch(Exception ex){
