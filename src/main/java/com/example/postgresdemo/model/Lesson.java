@@ -45,6 +45,8 @@ public class Lesson extends AuditModel {
     @OneToMany(mappedBy = "lesson")
     @JsonIgnoreProperties("lesson")
     private List<Remark> remarks;
+
+
 }
 
 

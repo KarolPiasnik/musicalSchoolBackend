@@ -1,10 +1,13 @@
 package com.example.postgresdemo.controller;
 
 import com.example.postgresdemo.exception.ResourceNotFoundException;
+import com.example.postgresdemo.model.Grade;
 import com.example.postgresdemo.model.Gradebook;
 import com.example.postgresdemo.model.Student;
 import com.example.postgresdemo.model.Subject;
+import com.example.postgresdemo.repository.GradeRepository;
 import com.example.postgresdemo.repository.GradebookRepository;
+import com.example.postgresdemo.repository.LessonRepository;
 import com.example.postgresdemo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +28,9 @@ public class StudentController {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private GradeRepository gradeRepository;
 
     @Autowired
     private GradebookRepository gradebookRepository;
@@ -61,6 +67,11 @@ public class StudentController {
                     student.setSurname(studentRequest.getSurname());
                     return studentRepository.save(student);
                 }).orElseThrow(() -> new ResourceNotFoundException("Student not found with id " + studentId));
+    }
+
+    @GetMapping("/api/students/{studentId}/grades")
+    public List<Grade> updateStudent(@PathVariable Long studentId) {
+        return gradeRepository.findAllByStudentId(studentId);
     }
 
 

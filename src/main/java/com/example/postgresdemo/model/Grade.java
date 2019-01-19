@@ -27,13 +27,13 @@ public class Grade extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "gradebook_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties("grades")
+    @JsonIgnoreProperties({"grades","lessons"})
     private Gradebook gradebook;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties("grades")
+    @JsonIgnoreProperties({"grades","remarks","lessons"})
     private Student student;
 }
 
