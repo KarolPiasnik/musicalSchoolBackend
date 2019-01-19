@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,6 +15,9 @@ import java.util.List;
 
 @RestController
 public class TeacherController {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     private TeacherRepository teacherRepository;
@@ -26,11 +30,7 @@ public class TeacherController {
 
     @PostMapping("/api/teachers")
     public Teacher createTeacher(@Valid @RequestBody Teacher teacher) {
-        System.out.println(teacher.getName());
-        System.out.println(teacher.getAddress());
-        System.out.println(teacher.getSurname());
-        System.out.println(teacher.getPesel());
-        // System.out.println(teacher.getActive());
+        teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
         return teacherRepository.save(teacher);
     }
 

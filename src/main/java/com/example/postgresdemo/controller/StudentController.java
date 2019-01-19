@@ -1,15 +1,19 @@
 package com.example.postgresdemo.controller;
 
 import com.example.postgresdemo.exception.ResourceNotFoundException;
+import com.example.postgresdemo.model.Grade;
 import com.example.postgresdemo.model.Gradebook;
 import com.example.postgresdemo.model.Student;
 import com.example.postgresdemo.model.Subject;
+import com.example.postgresdemo.repository.GradeRepository;
 import com.example.postgresdemo.repository.GradebookRepository;
+import com.example.postgresdemo.repository.LessonRepository;
 import com.example.postgresdemo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +24,13 @@ import java.util.NoSuchElementException;
 public class StudentController {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private GradeRepository gradeRepository;
 
     @Autowired
     private GradebookRepository gradebookRepository;
@@ -33,6 +43,7 @@ public class StudentController {
 
     @PostMapping("/api/students")
     public Student createStudent(@Valid @RequestBody Student student) {
+        student.setPassword(passwordEncoder.encode(student.getPassword()));
         if (student.getMainGradebook() != null) {
             if (student.getMainGradebook().getId() != null) {
                 Gradebook gradebook = gradebookRepository.getOne(student.getMainGradebook().getId());
@@ -56,6 +67,11 @@ public class StudentController {
                     student.setSurname(studentRequest.getSurname());
                     return studentRepository.save(student);
                 }).orElseThrow(() -> new ResourceNotFoundException("Student not found with id " + studentId));
+    }
+
+    @GetMapping("/api/students/{studentId}/grades")
+    public List<Grade> updateStudent(@PathVariable Long studentId) {
+        return gradeRepository.findAllByStudentId(studentId);
     }
 
 

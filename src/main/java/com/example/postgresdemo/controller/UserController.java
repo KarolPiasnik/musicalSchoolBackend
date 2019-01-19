@@ -35,9 +35,6 @@ public class UserController {
     @PostMapping("/api/users")
     public User createUser(@Valid @RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        if (user.getActive() == null) {
-//            user.setActive(false);
-//        }
         return userRepository.save(user);
     }
 

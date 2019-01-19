@@ -2,6 +2,9 @@ package com.example.postgresdemo.model;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+
 @Data
-public class Administrator extends Person {
+@Entity
+public class Administrator extends User {
 }
