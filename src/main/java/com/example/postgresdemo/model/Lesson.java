@@ -41,6 +41,10 @@ public class Lesson extends AuditModel {
     private Date startTime;
 
     private Date endTime;
+
+    @OneToMany(mappedBy = "lesson")
+    @JsonIgnoreProperties("lesson")
+    private List<Remark> remarks;
 }
 
 

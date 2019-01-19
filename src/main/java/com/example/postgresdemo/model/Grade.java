@@ -21,25 +21,20 @@ public class Grade extends AuditModel {
             initialValue = 1000
     )
     private Long id;
-//
-////    @ManyToMany(cascade = {CascadeType.ALL})
-////    @JoinTable(
-////            name = "Lesson_Student",
-////            joinColumns = {@JoinColumn(name = "lesson_id")},
-////            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-////    )
-////    @JsonIgnoreProperties("lessons")
-////    private List<Student> students;
-//
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "gradebook_id", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnoreProperties("lessons")
-//    private Gradebook gradebook;
-//
-//    private Date from;
-//
-//    private Date to;
+
+    private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "gradebook_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("grades")
+    private Gradebook gradebook;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "student_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("grades")
+    private Student student;
 }
 
 

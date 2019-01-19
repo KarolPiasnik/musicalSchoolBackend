@@ -2,12 +2,10 @@ package com.example.postgresdemo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import javax.persistence.Id;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -24,12 +22,20 @@ public class Remark extends AuditModel {
     )
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "student_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("remarks")
     private Student student;
 
-    private Gradebook gradebook;
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "lesson_id", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("remarks")
+    private Gradebook lesson;
 
-    String content;
-
+    private String content;
 }
+
 
 

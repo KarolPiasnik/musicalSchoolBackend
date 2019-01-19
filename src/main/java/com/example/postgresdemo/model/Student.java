@@ -41,4 +41,11 @@ public class Student extends User {
     @JsonIgnoreProperties("students")
     private List<Lesson> lessons;
 
+    @OneToMany(mappedBy = "student")
+    @JsonIgnoreProperties("student")
+    private List<Remark> remarks;
+
+    @OneToMany(mappedBy = "student")
+    @JsonIgnoreProperties("student")
+    private List<Grade> grades;
 }
