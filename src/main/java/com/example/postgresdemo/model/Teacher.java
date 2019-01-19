@@ -39,4 +39,6 @@ public class Teacher extends AuditModel {
     @OneToMany(mappedBy = "teacher")
     @JsonIgnoreProperties("teacher")
     private List<Gradebook> gradebooks;
+
+    private String headmasterDesc;
 }

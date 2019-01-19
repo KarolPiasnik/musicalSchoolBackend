@@ -44,6 +44,7 @@ public class TeacherController {
                     teacher.setSurname(teacherRequest.getSurname());
                     teacher.setPesel(teacherRequest.getPesel());
                     teacher.setAddress(teacherRequest.getAddress());
+                    teacher.setHeadmasterDesc(teacherRequest.getHeadmasterDesc());
                     return teacherRepository.save(teacher);
                 }).orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id " + teacherId));
     }
