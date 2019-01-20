@@ -38,7 +38,15 @@ public class TeacherController {
     @PutMapping("/api/teachers/{teacherId}")
     public Teacher updateTeacher(@PathVariable Long teacherId,
                                  @Valid @RequestBody Teacher teacherRequest) {
-        return teacherRepository.findById(teacherId).orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id " + teacherId));
+        return teacherRepository.findById(teacherId)
+                .map(teacher -> {
+                    teacher.setName(teacherRequest.getName());
+                    teacher.setSurname(teacherRequest.getSurname());
+                    teacher.setPesel(teacherRequest.getPesel());
+                    teacher.setAddress(teacherRequest.getAddress());
+                    teacher.setHeadmasterDesc(teacherRequest.getHeadmasterDesc());
+                    return teacherRepository.save(teacher);
+                }).orElseThrow(() -> new ResourceNotFoundException("Teacher not found with id " + teacherId));
     }
 
 

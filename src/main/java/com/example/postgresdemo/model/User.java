@@ -35,7 +35,7 @@ public class User extends AuditModel implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Role> roles;
 
-    private Boolean active;
+    private Boolean active = true;
 
     private String pesel;
 

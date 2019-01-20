@@ -65,6 +65,9 @@ public class StudentController {
                 .map(student -> {
                     student.setName(studentRequest.getName());
                     student.setSurname(studentRequest.getSurname());
+                    student.setUsername(studentRequest.getUsername());
+                    student.setPesel(studentRequest.getPesel());
+                    student.setAddress(studentRequest.getAddress());
                     return studentRepository.save(student);
                 }).orElseThrow(() -> new ResourceNotFoundException("Student not found with id " + studentId));
     }

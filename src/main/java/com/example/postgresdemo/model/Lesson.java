@@ -35,7 +35,7 @@ public class Lesson extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "gradebook_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties(value = {"lessons"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"lessons"}, allowSetters = false)
     private Gradebook gradebook;
 
     private Date startTime;
@@ -47,6 +47,8 @@ public class Lesson extends AuditModel {
     private List<Remark> remarks;
 
 
+
+    private Boolean present;
 }
 
 
