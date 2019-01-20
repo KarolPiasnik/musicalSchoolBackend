@@ -10,5 +10,7 @@ import java.util.List;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
-    List<Message> getAllByReceiversIsContainingOrStudentFrom(List<Student> receivers, Student studentFrom);
+    List<Message> getAllByReceiversIsContainingOrUserFrom(List<User> receivers, User userFrom);
+
+
 }

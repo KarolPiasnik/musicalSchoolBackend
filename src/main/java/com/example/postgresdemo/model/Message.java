@@ -27,18 +27,18 @@ public class Message extends AuditModel {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Student studentFrom;
+    private User userFrom;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
-            name = "message_student",
+            name = "message_user",
             joinColumns = {@JoinColumn(name = "message_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
     @JsonIgnoreProperties("gradebooks")
-    private List<Student> receivers;
+    private List<User> receivers;
 }
 
 
